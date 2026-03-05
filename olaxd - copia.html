@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Login Seguro</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #4e73df, #1cc88a);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.login-box {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    width: 320px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    text-align: center;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    background: #4e73df;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #2e59d9;
+}
+
+.error {
+    color: red;
+    font-size: 14px;
+    min-height: 18px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="login-box">
+<h2>Iniciar Sesión</h2>
+
+<form id="loginForm">
+<input type="text" id="usuario" placeholder="Nombre de usuario" required>
+<input type="password" id="password" placeholder="Contraseña" required>
+<button type="submit">Entrar</button>
+<p class="error" id="error"></p>
+</form>
+
+</div>
+
+<script>
+
+document.getElementById("loginForm").addEventListener("submit", function(e) {
+
+    e.preventDefault(); // evita recargar
+
+    const usuario = document.getElementById("usuario").value.toLowerCase();
+    const password = document.getElementById("password").value;
+    const error = document.getElementById("error");
+
+    if (usuario.includes("@")) {
+        error.textContent = "Pon un usuario no robo correos we";
+        return;
+    }
+
+    const dominiosBloqueados = ["gmail", "hotmail", "yahoo", "outlook"];
+
+    for (let i = 0; i < dominiosBloqueados.length; i++) {
+        if (usuario.includes(dominiosBloqueados[i])) {
+            error.textContent = "Pon un usuario no robo correos we";
+            return;
+        }
+    }
+
+    error.textContent = "";
+
+    console.log("Datos capturados:");
+    console.log("Usuario:", usuario);
+    console.log("Contraseña:", password);
+
+    alert("No supe hacer que se mande aun correo, pero se guarda en consola almenos.");
+
+    window.location.href = "https://www.google.com";
+
+});
+
+</script>
+
+</body>
+</html>
